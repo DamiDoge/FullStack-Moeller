@@ -1,2 +1,7 @@
 # FullStack-Moeller
-Repository for 4443 class
+
+![Imgur](http://i.imgur.com/TciWIOL.jpg?1)
+
+Damien Moeller
+
+dmoeller02@gmail.com

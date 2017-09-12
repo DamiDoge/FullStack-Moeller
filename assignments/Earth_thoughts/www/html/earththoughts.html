@@ -95,12 +95,16 @@
     <script>
         $(function() {
             console.log( "ready!" );
+            //have the python program send Earth porn
             $.get( "http://localhost:5050/get_image", function( data ) {
                 //console.log(data.url)
+                //Change the background image url attribute of the main_image object.
                 $('#main_image').css('background-image','url('+data.url+')');
             });
+            //have the python program send a shower thought
             $.get( "http://localhost:5050/get_thought", function( data ) {
-                console.log(data.url)
+                //console.log(data.url)
+                //Place the quote within the header tag in the main_image object.
                 $("#main_image h1").html(data.url);
             });
         });

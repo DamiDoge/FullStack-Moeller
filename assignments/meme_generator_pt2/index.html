@@ -1,0 +1,403 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta name="description" content="">
+    <meta name="author" content="">
+    <link rel="icon" href="favicon.ico">
+
+    <title>Meme Generator</title>
+
+    <!-- Bootstrap core CSS -->
+    <link href="./css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet/less" type="text/css" href="./css/navs.less" />
+
+    <!-- Custom styles for this template -->
+    <link href="./css/cover.css" rel="stylesheet">
+    <style>
+        .steps {
+            text-align: left;
+        }
+
+        .textstyle {
+            width: 400px;
+            height: 80px;
+            border: 3px solid #cccccc;
+            padding: 5px;
+            font-family: Tahoma, sans-serif;
+            /* background-image: url(bg.gif); */
+            background-position: bottom right;
+            background-repeat: no-repeat;
+            color: black;
+        }
+
+        .modal-content{
+            color:black;
+        }
+        .meme_image {
+            width: 100%;
+            height: 200px;
+            background-repeat: no-repeat;
+            background-size: contain;
+            border: 1px solid grey;
+        }
+
+        .modal-header {
+            padding: 0;
+            color:black;
+        }
+
+        .modal-header .close {
+            padding: 10px 15px;
+        }
+
+        .modal-header ul {
+            border: none;
+        }
+
+        .modal-header ul li {
+            margin: 0;
+        }
+
+        .modal-header ul li a {
+            border: none;
+            border-radius: 0;
+            color:gray;
+        }
+
+        .modal-header ul li.active a {
+            color: #e12f27;
+        }
+
+        .modal-header ul li a:hover {
+            border: none;
+        }
+
+        .modal-header ul li a span {
+            margin-left: 10px;
+        }
+
+        .modal-body .form-group {
+            margin-bottom: 10px;
+        }
+    </style>
+</head>
+
+<body>
+
+    <div class="site-wrapper">
+        <div class="site-wrapper-inner">
+            <div class="cover-container">
+                <div class="masthead clearfix">
+                    <div class="inner">
+                        <h3 class="masthead-brand">Meme Generator</h3>
+                        <nav class="nav nav-masthead">
+                            <a class="nav-link active" href="#">Home</a>
+                            <a class="nav-link" href="#">Features</a>
+                            <a class="nav-link" href="#">Contact</a>
+                            <a class="nav-link" href="#signup" data-toggle="modal" data-target=".login-register-form">Register</a>
+                            <!-- <button class="btn btn-primary btn-lg" href="#signup" data-toggle="modal" data-target=".bs-modal-sm">Sign In/Register</button> -->
+                        </nav>
+                    </div>
+                </div>
+                <div id="showImage" class="meme_image">
+
+                </div>
+                <div id="textForm">
+                    <form class="steps" onsubmit="event.preventDefault();" id="enterTextForm">
+                        <fieldset>
+                            <div class="form-group">
+                                <label>Step 3 - Enter Text</label>
+                            </div>
+                            <div class="form-group">
+                                <label for="topText">Top Text</label>
+                                <textarea name="topText" id="topText" class="textstyle"></textarea>
+                                <label for="botText">Bottom Text</label>
+                                <textarea name="botText" id="botText" class="textstyle"></textarea>
+                            </div>
+                            <div class="form-group">
+                                <label>Step 4 - Generate</label>
+                            </div>
+                            <div class="form-group">
+                                <button type="submit" class="btn btn-primary">Generate</button>
+                            </div>
+                        </fieldset>
+                    </form>
+                </div>
+
+
+                <div class="mastfoot">
+                    <div class="inner">
+                        <p>Cover template for <a href="https://getbootstrap.com">Bootstrap</a>, by <a href="https://twitter.com/mdo">@mdo</a>.</p>
+                    </div>
+                </div>
+
+            </div>
+
+        </div>
+
+    </div>
+
+    <!-- Modal login form -->
+
+    <div class="container">
+        <div class="row">
+
+            <!-- Login / Register Modal-->
+            <div class="modal fade login-register-form" role="dialog">
+                <div class="modal-dialog modal-sm">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <button type="button" class="close" data-dismiss="modal">
+                                                <span class="glyphicon glyphicon-remove"></span>
+                                            </button>
+                            <ul class="nav nav-tabs">
+                                <li class="active"><a data-toggle="tab" href="#login-form"> Login <span class="glyphicon glyphicon-user"></span></a></li>
+                                <li><a data-toggle="tab" href="#registration-form"> Register <span class="glyphicon glyphicon-pencil"></span></a></li>
+                            </ul>
+                        </div>
+                        <div class="modal-body">
+                            <div class="tab-content">
+                                <div id="login-form" class="tab-pane fade in active">
+                                    <form action="/">
+                                        <div class="form-group">
+                                            <label for="email">Email:</label>
+                                            <input type="email" class="form-control" id="email" placeholder="Enter email" name="email">
+                                        </div>
+                                        <div class="form-group">
+                                            <label for="pwd">Password:</label>
+                                            <input type="password" class="form-control" id="pwd" placeholder="Enter password" name="pwd">
+                                        </div>
+                                        <div class="checkbox">
+                                            <label><input type="checkbox" name="remember"> Remember me</label>
+                                        </div>
+                                        <button type="submit" class="btn btn-default">Login</button>
+                                    </form>
+                                </div>
+                                <div id="registration-form" class="tab-pane fade">
+                                    <form action="/">
+                                        <div class="form-group">
+                                            <label for="name">First Name:</label>
+                                            <input type="text" class="form-control" id="fname" placeholder="Enter your first name" name="fname">
+                                        </div>
+                                        <div class="form-group">
+                                            <label for="name">Last Name:</label>
+                                            <input type="text" class="form-control" id="lname" placeholder="Enter your last name" name="lname">
+                                        </div>
+                                        <div class="form-group">
+                                            <label for="newemail">Email:</label>
+                                            <input type="email" class="form-control" id="newemail" placeholder="Enter new email" name="newemail">
+                                        </div>
+                                        <div class="form-group">
+                                            <label for="newusrn">Username:</label>
+                                            <input type="text" class="form-control" id="newusrn" placeholder="Enter new username" name="newusrn">
+                                        </div>
+                                        <div class="form-group">
+                                            <label for="newpwd">Password:</label>
+                                            <input type="password" class="form-control" id="newpwd" placeholder="New password" name="newpwd">
+                                        </div>
+                                        <button type="submit" class="btn btn-default" id="registerNew">Register</button>
+                                    </form>
+                                </div>
+
+                            </div>
+                        </div>
+                        <!--                                    <div class="modal-footer">-->
+                        <!--                                        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>-->
+                        <!--                                    </div>-->
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+    <!-- END Modal -->
+
+    <!-- Bootstrap core JavaScript
+    ================================================== -->
+    <!-- Placed at the end of the document so the pages load faster -->
+    <script src="./js/jquery-3.2.1.min.js"></script>
+    <script src="./js/tether.min.js"></script>
+    <script src="./js/bootstrap.min.js"></script>
+    <script>
+        $(function () {
+
+            function live_reload(path) {
+                console.log($('#showImage').css("background-image"))
+                var data = {
+                    'topText': $("#topText").val(),
+                    'botText': $("#botText").val(),
+                    'image_path': path
+                }
+                var settings = {
+                    "data": data,
+                    "async": true,
+                    "crossDomain": false,
+                    "url": "http://localhost:5050/meme_generator/v1.0/generate_image",
+                    "method": "POST",
+                    "headers": {
+                        "cache-control": "no-cache"
+                    }
+                }
+                $.ajax(settings).done(function (response) {
+
+                    $('#showImage').css("background-image", "url(" + response.output_name + ")");
+
+                });
+            }
+
+
+            var image_form = '';
+            image_form += '<form class="steps" onsubmit="event.preventDefault();" id="getImageForm">';
+            image_form += '<fieldset>';
+            image_form += '<div class="form-group">';
+            image_form += '<label for="picurl">Get Your Image</label>';
+            image_form += '<input type="text" id="picurl" class="form-control" placeholder="Url" value="https://imgflip.com/s/meme/One-Does-Not-Simply.jpg">';
+            image_form += '<label for="picName">Name Image</label>';
+            image_form += '<input type="text" id="picName" class="form-control" placeholder="Pic Name">';
+            image_form += '<button type="submit" class="btn btn-primary" id="submitImage">Submit</button>';
+            image_form += '</div>';
+            image_form += '</fieldset>';
+            image_form += '</form>';
+            $('#showImage').html(image_form);
+
+            $('#enterTextForm').hide()
+
+            $("#confirmsignup").click(function () {
+                email = $('#Email').val()
+                userid = $('#userid').val()
+                pass = $('#password').val()
+                repass = $('#reenterpassword').val()
+
+                url = "http://localhost:5050/meme_generator/v1.0/register"
+
+                data = {
+                    "email": email,
+                    "userid": userid,
+                    "pass": pass
+                }
+
+                function register_success(response) {
+                    console.log(response);
+
+                }
+
+                function register_failure(response) {
+                    console.log(response);
+                }
+
+                my_request("POST", url, data, register_success, register_failure);
+
+            });
+
+            $("#registerNew").click(function () {
+                email = $('#newemail').val()
+                newuser = $('#newusrn').val()
+                pass = $('#newpwd').val()
+                fname = $('#fname').val()
+                lname = $('#lname').val()
+
+                url = "http://localhost:5050/user/new"
+
+                data = {
+                    "username" : newuser,
+                    "last" : lname,
+                    "password" : pass,
+                    "email" : email,
+                    "first" : fname
+                }
+
+                function register_success(response) {
+                    console.log(response);
+
+                }
+
+                function register_failure(response) {
+                    console.log(response);
+                }
+
+                my_request("POST", url, data, register_success, register_failure);
+            });
+
+            $("#submitImage").click(function () {
+                url = $('#picurl').val()
+                name = $('#picName').val()
+
+                console.log(url);
+                console.log(name);
+                url = "http://localhost:5050/meme_generator/v1.0/grab_image?url=" + url + "&" + "fname=" + name
+
+
+                function image_success(response) {
+                    console.log(response);
+                    $('#getImageForm').remove()
+                    $('#enterTextForm').show();
+                    $('#showImage').addClass("meme_image")
+                    $('#showImage').css("background-image", "url(" + response.img_path + ")");
+                    $("#topText").keydown(function () {
+                        live_reload(response.img_path)
+                    });
+                }
+
+                function image_failure(response) {
+                    console.log(response);
+                }
+
+                my_request("GET", url, {}, image_success, image_failure);
+
+            });
+
+            //For use later to create a robust ajax handler
+            function my_request2(type, url, data, successHandler, failureHandler) {
+                var jqxhr = $.ajax({
+                    async: true,
+                    crossDomain: false,
+                    headers: {
+                        "cache-control": "no-cache"
+                    },
+                    url: url,
+                    type: type, // default is GET but you can use other verbs based on your needs.
+                    cache: true, // default is true, but false for dataType 'script' and 'jsonp', so set it on need basis.
+                    data: data, // add your request parameters in the data object.
+                    dataType: "json", // specify the dataType for future reference
+
+                    //jsonp: "callback", // only specify this to match the name of callback parameter your API is expecting for JSONP requests.
+                    // statusCode: { // if you want to handle specific error codes, use the status code mapping settings.
+                    //     404: handler404,
+                    //     500: handler500
+                    // }
+                });
+                jqxhr.done(successHandler);
+                jqxhr.fail(failureHandler);
+            }
+
+            function my_request(method, url, data, successHandler, failureHandler) {
+                
+                var jqxhr = $.ajax({
+                    "async": true,
+                    "crossDomain": true,
+                    "url": url,
+                    "method": method,
+                    "headers": {
+                        "cache-control": "no-cache",
+                        "postman-token": "e94cfe4d-dd33-f8e4-11a3-3730a3c25500"
+                    },
+                    "processData": false,
+                    "contentType": false,
+                    "mimeType": "multipart/form-data",
+                    "data": data
+                });
+                jqxhr.done(successHandler);
+                jqxhr.fail(failureHandler);
+
+            }
+
+
+        });
+    </script>
+</body>
+
+</html>

@@ -1,0 +1,253 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta name="description" content="">
+    <meta name="author" content="">
+
+    <title>Where's Waldo</title>
+
+    <!-- Bootstrap core CSS -->
+    <link href="./css/bootstrap.min.css" rel="stylesheet">
+
+    <!-- Custom styles for this template -->
+    <link href="./css/the-big-picture.css" rel="stylesheet">
+    <link href="./css/magnifier.css" rel="stylesheet">
+    <style>
+        body {
+            /* background: url('./images/1.jpg') no-repeat center center fixed; */
+            /* -webkit-background-size: cover;
+            -moz-background-size: cover;
+            background-size: cover;
+            -o-background-size: cover; */
+            /* background-size: contain; */
+        }
+
+        #thumb {
+            width: 1024px;
+            height: 800px;
+        }
+
+        .mycenter {
+            margin-left: auto;
+            margin-right: auto;
+        }
+
+        .affix {
+            width: 360px;
+        }
+    </style>
+
+</head>
+
+<body>
+
+    <!-- Navigation -->
+    <nav class="navbar navbar-expand-lg navbar-dark bg-dark fixed-bottom">
+        <div class="container">
+            <a class="navbar-brand" href="#">How's Waldo?</a>
+            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarResponsive" aria-controls="navbarResponsive"
+                aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarResponsive">
+                <ul class="navbar-nav ml-auto">
+                    <li class="nav-item active">
+                        <button type="button" class="btn btn-primary" id="startTime">Start</button>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link">        </a>
+                    </li>
+                    <li class="nav-item active">
+                        <button type="button" class="btn btn-warning" id="pauseTime">Pause</button>
+                    </li>
+                    <!--<li class="nav-item">
+                        <a class="nav-link" href="#">About</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#">Contact</a>
+                    </li>-->
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Page Content -->
+    <div class="row">
+        <font face="impact">
+            <div class="col display-1 affix" id="stopwatch">
+
+            </div>
+        </font>
+
+        <div class="container">
+            <div class="row">
+                <div class="col">
+
+                </div>
+                <div class="col-12 col-md-auto mycenter">
+                    <img src="./images/crowd.jpg" id="thumb">
+                </div>
+                <div class="col col-lg-2">
+
+                </div>
+            </div>
+        </div>
+
+        <font face="impact">
+            <div class="col display-4 affix" id="results">
+
+            </div>
+        </font>
+    </div>
+
+    <!-- Bootstrap core JavaScript -->
+    <script src="./js/jquery.min.js"></script>
+    <script src="./js/bootstrap.bundle.min.js"></script>
+    <script src="./js/Event.js"></script>
+    <script src="./js/Magnifier.js"></script>
+    <script>
+        var evt = new Event();
+        //var m = new Magnifier(evt);
+
+        blur($("#thumb"), 25);
+
+        $("#startTime").click(function () {
+            blur($("#thumb"), 0);
+            stopwatch.start();
+        });
+
+        $("#pauseTime").click(function () {
+            blur($("#thumb"), 25);
+            stopwatch.lap();
+            stopwatch.stop();
+        });
+
+        /*m.attach({
+            thumb: '#thumb',
+            large: 'http://griffincomplaints.xyz/waldo/images/crowd.jpg',
+            mode: 'inside',
+            zoom: 3,
+            zoomable: true
+        });*/
+
+        $(".mycenter").click(function (evt) {
+            console.log(evt);
+        });
+
+        function blur(elem, x) {
+            var filterVal = 'blur(' + x + 'px)';
+
+            elem.css('filter', filterVal)
+                .css('webkitFilter', filterVal)
+                .css('mozFilter', filterVal)
+                .css('oFilter', filterVal)
+                .css('msFilter', filterVal);
+        }
+
+        class Stopwatch {
+            constructor(display, results) {
+                this.running = false;
+                this.display = display;
+                this.results = results;
+                this.laps = [];
+                this.reset();
+                this.print(this.times);
+            }
+
+            reset() {
+                this.times = [0, 0, 0];
+            }
+
+            start() {
+                if (!this.time) this.time = performance.now();
+                if (!this.running) {
+                    this.running = true;
+                    requestAnimationFrame(this.step.bind(this));
+                }
+            }
+
+            lap() {
+                let times = this.times;
+                let li = document.createElement('li');
+                li.innerText = this.format(times);
+                this.results.appendChild(li);
+            }
+
+            stop() {
+                this.running = false;
+                this.time = null;
+            }
+
+            restart() {
+                if (!this.time) this.time = performance.now();
+                if (!this.running) {
+                    this.running = true;
+                    requestAnimationFrame(this.step.bind(this));
+                }
+                this.reset();
+            }
+
+            clear() {
+                clearChildren(this.results);
+            }
+
+            step(timestamp) {
+                if (!this.running) return;
+                this.calculate(timestamp);
+                this.time = timestamp;
+                this.print();
+                requestAnimationFrame(this.step.bind(this));
+            }
+
+            calculate(timestamp) {
+                var diff = timestamp - this.time;
+                // Hundredths of a second are 100 ms
+                this.times[2] += diff / 10;
+                // Seconds are 100 hundredths of a second
+                if (this.times[2] >= 100) {
+                    this.times[1] += 1;
+                    this.times[2] -= 100;
+                }
+                // Minutes are 60 seconds
+                if (this.times[1] >= 60) {
+                    this.times[0] += 1;
+                    this.times[1] -= 60;
+                }
+            }
+
+            print() {
+                this.display.innerText = this.format(this.times);
+            }
+
+            format(times) {
+                return `\
+${pad0(times[0], 2)}:\
+${pad0(times[1], 2)}:\
+${pad0(Math.floor(times[2]), 2)}`;
+            }
+        }
+
+        function pad0(value, count) {
+            var result = value.toString();
+            for (; result.length < count; --count)
+                result = '0' + result;
+            return result;
+        }
+
+        function clearChildren(node) {
+            while (node.lastChild)
+                node.removeChild(node.lastChild);
+        }
+
+        let stopwatch = new Stopwatch(
+            document.querySelector('#stopwatch'),
+            document.querySelector('#results'));
+    </script>
+
+</body>
+
+</html>

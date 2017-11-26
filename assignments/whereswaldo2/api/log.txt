@@ -1,0 +1,18 @@
+GET
+Array
+(
+    [0] => 
+    [1] => whereswaldo2
+    [2] => api
+    [3] => api.php
+    [4] => make_game_board
+)
+
+args array:
+Array
+(
+)
+
+endpoint:
+make_game_board
+make_game_board
